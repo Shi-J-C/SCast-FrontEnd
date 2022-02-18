@@ -2,7 +2,10 @@ import React from 'react'
 import { MdOutlineForum } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-export default function ForumDetail({ moduleCode, moduleName }) {
+export default function ForumDetail({ moduleCode, moduleName, createdAt }) {
+  var str = createdAt
+  var res = str.substring(0, 10)
+
   return (
     <div className='subforum-row'>
       <div className='subforum-icon subforum-column center'>
@@ -15,7 +18,11 @@ export default function ForumDetail({ moduleCode, moduleName }) {
         <p>{moduleName}</p>
       </div>
       <div className='subforum-stats subforum-column center'>
-        <span>24 Posts | 15 Topics</span>
+        <span>
+          {'Module created at'}
+          <br />
+          {res}
+        </span>
       </div>
       <div className='subforum-info subforum-column '>
         <b>

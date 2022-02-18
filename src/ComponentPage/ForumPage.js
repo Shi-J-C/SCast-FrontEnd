@@ -13,7 +13,11 @@ export default function ForumPage() {
   const [showY4, setShowY4] = useState(true)
 
   useEffect(() => {
-    setModuleData(data)
+    axios.get('http://localhost:3000/module').then((res) => {
+      let database = res.data
+      console.log(database)
+      setModuleData(res.data)
+    })
   }, [])
 
   return (
