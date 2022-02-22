@@ -30,6 +30,7 @@ export default function CreateModule() {
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
+        {/* Enter module code for creation */}
         <input
           placeholder='Enter Module Code'
           type='text'
@@ -37,6 +38,8 @@ export default function CreateModule() {
           id='moduleCode'
           value={data.moduleCode}
         ></input>
+
+        {/* Enter module name */}
         <input
           placeholder='Enter Module Name'
           type='text'
@@ -44,6 +47,8 @@ export default function CreateModule() {
           id='moduleName'
           value={data.moduleName}
         ></input>
+
+        {/* click to submit */}
         <button>Submit</button>
       </form>
     </div>
