@@ -19,9 +19,10 @@ export default function ForumDetail({ moduleCode, moduleName, createdAt }) {
       </div>
       <div className='subforum-stats subforum-column center'>
         <span>
-          {'Module created at'}
+          {/* {'Module created at'}
           <br />
-          {res}
+          {res} */}
+          25 Posts | 15 Replies
         </span>
       </div>
       <div className='subforum-info subforum-column '>

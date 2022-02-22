@@ -8,6 +8,7 @@ import About from './ComponentPage/About'
 import Posts from './ComponentPage/Posts'
 import Post from './ComponentPage/Post'
 import CreatePost from './ComponentPage/CreatePost'
+import CreateModule from './ComponentPage/CreateModule'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/forum/:id' element={<Posts />}></Route>
           <Route path='/forum/:id/posts/:index' element={<Post />}></Route>
           <Route path='/forum/:id/createpost' element={<CreatePost />}></Route>
+          <Route path='/createmodule' element={<CreateModule />}></Route>
         </Routes>
       </Router>
     </div>

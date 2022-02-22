@@ -10,6 +10,7 @@ export default function Nav() {
         <nav className='navigation'>
           <ul className='nav-list'>
             <div className='nav-item'>
+              <Link to='/createmodule'>Create Module</Link>
               <Link to='/forum'>Forum</Link>
               <Link to='/about'>About</Link>
               <Link to='/'>Home</Link>
