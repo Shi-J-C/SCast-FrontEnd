@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
-import data from '../data'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ForumDetail from './ForumDetail'
 import { FaChartBar } from 'react-icons/fa'
@@ -14,8 +12,7 @@ export default function ForumPage() {
 
   useEffect(() => {
     axios.get('http://localhost:3000/module').then((res) => {
-      let database = res.data
-      console.log(database)
+      console.log(res.data)
       setModuleData(res.data)
     })
   }, [])
@@ -23,7 +20,7 @@ export default function ForumPage() {
   return (
     <div>
       <div className='container'>
-        <div className='subforum'>
+        {/* <div className='subforum'>
           <div className='subforum-title'>
             <h1>General Information</h1>
           </div>
@@ -36,7 +33,7 @@ export default function ForumPage() {
             .map((d) => {
               return <ForumDetail key={d.moduleCode} {...d} />
             })}
-        </div>
+        </div> */}
 
         <div className='subforum'>
           <div className='subforum-title'>
@@ -55,7 +52,7 @@ export default function ForumPage() {
                   }
                 })
                 .map((d) => {
-                  return <ForumDetail key={d.moduleCode} {...d} />
+                  return <ForumDetail key={d._id} {...d} />
                 })
             : ''}
 
@@ -71,7 +68,7 @@ export default function ForumPage() {
                   }
                 })
                 .map((d) => {
-                  return <ForumDetail key={d.moduleCode} {...d} />
+                  return <ForumDetail key={d._id} {...d} />
                 })
             : ''}
 
@@ -87,7 +84,7 @@ export default function ForumPage() {
                   }
                 })
                 .map((d) => {
-                  return <ForumDetail key={d.moduleCode} {...d} />
+                  return <ForumDetail key={d._id} {...d} />
                 })
             : ''}
 
@@ -103,7 +100,7 @@ export default function ForumPage() {
                   }
                 })
                 .map((d) => {
-                  return <ForumDetail key={d.moduleCode} {...d} />
+                  return <ForumDetail key={d._id} {...d} />
                 })
             : ''}
         </div>
@@ -128,7 +125,7 @@ export default function ForumPage() {
         </div>
       </div>
 
-      <footer style={{}}>
+      <footer>
         <span>&copy;&nbsp;SCast | All rights Reserved.</span>
       </footer>
     </div>
