@@ -31,7 +31,10 @@ export default function Post() {
       <div className='topic-container'>
         <div className='head'>
           <div className='authors'>Author</div>
-          <div className='content'>Topic: {post.postTitle}</div>
+          <div className='content'>
+            {post.postType} : {post.postTitle}
+            <img src={`${post.postImage}`} alt=''></img>
+          </div>
           <div className='postreply'>
             <button
               onClick={() => {
@@ -53,7 +56,7 @@ export default function Post() {
             <div className='username'>
               Posted By
               <br />
-              {post.userid}
+              {post.userId}
               <br />
               This Data and Time
             </div>
@@ -62,7 +65,8 @@ export default function Post() {
           <div className='content'>
             {post.text}
             <hr />
-            Regards {post.userid}
+            Regards {post.userId}
+            <img src={`${post.postImage}`} alt=''></img>
             <div className='comment'>
               <button
                 onClick={() => {

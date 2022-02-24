@@ -14,7 +14,7 @@ export default function CreatePost() {
 
   const url = `http://localhost:3000/post/${id}/addPost`
   const [data, setData] = useState({
-    userId: 'joanpe',
+    userId: 'josanpe',
     postTitle: '',
     postImage: '',
     postType: 'Lecture Note',
@@ -25,7 +25,7 @@ export default function CreatePost() {
     const newData = { ...data }
     newData[e.target.id] = e.target.value
     setData(newData)
-    // console.log(newData)
+    console.log(newData)
   }
 
   function handleSubmit(e) {
