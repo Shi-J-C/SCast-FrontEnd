@@ -1,45 +1,35 @@
 import axios from 'axios'
+import FileBase from 'react-file-base64'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import Post from './Post'
 
 export default function CreatePost() {
   const { id } = useParams()
-  const [module, setModule] = useState([])
+  const [moduleCode, setModuleCode] = useState('')
 
   useEffect(() => {
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
-      setModule(res.data)
+      setModuleCode(res.data.moduleCode)
     })
   }, [])
 
   const url = `http://localhost:3000/post/${id}/addPost`
-  const [data, setData] = useState({
-    userId: 'josanpe',
+  const [postData, setPostData] = useState({
+    userId: 'Joann',
     postTitle: '',
     postImage: '',
+    postObjective: '',
     postType: 'Lecture Note',
     comment: [],
   })
 
-  function handleChange(e) {
-    const newData = { ...data }
-    newData[e.target.id] = e.target.value
-    setData(newData)
-    console.log(newData)
-  }
-
   function handleSubmit(e) {
-    e.preventDefault()
-    // axios
-    //   .post(url, {
-    //     userId: 'joanpe',
-    //     postTitle: data.postTitle,
-    //     postImage: data.postImage,
-    //     postType: data.postType,
-    //     comment: [],
-    //   })
-    //   .then((res) => console.log(res.data))
-    console.log(data)
+    // e.preventDefault()
+    // axios.post(url, postData).then((res) => console.log(res.data))
+    axios.post(url, postData)
+    console.log(postData)
+    alert('Create Post successfully')
   }
   return (
     <div>
@@ -47,8 +37,7 @@ export default function CreatePost() {
         <span>
           <span>
             <Link to={'/forum'}>SCast Forum - Forum</Link> {'>>'}{' '}
-            <Link to={`/forum/${id}`}>{module.moduleCode}</Link> {'>>'}{' '}
-            {'New Post'}
+            <Link to={`/forum/${id}`}>{moduleCode}</Link> {'>>'} {'New Post'}
           </span>
         </span>
       </div>
@@ -58,17 +47,21 @@ export default function CreatePost() {
         <input
           placeholder='Post Title...'
           type='text'
-          onChange={(e) => handleChange(e)}
           id='postTitle'
-          value={data.postTitle}
+          value={postData.postTitle}
+          onChange={(e) =>
+            setPostData({ ...postData, postTitle: e.target.value })
+          }
         ></input>
 
         <br />
         {/* Select your question topic */}
         <select
           id='postType'
-          value={data.postType}
-          onChange={(e) => handleChange(e)}
+          value={postData.postType}
+          onChange={(e) =>
+            setPostData({ ...postData, postType: e.target.value })
+          }
         >
           <option>Lecture Note</option>
           <option>Tutorial</option>
@@ -81,21 +74,24 @@ export default function CreatePost() {
         <textarea
           placeholder='Enter your question'
           type='text'
-          onChange={(e) => handleChange(e)}
+          onChange={(e) =>
+            setPostData({ ...postData, postObjective: e.target.value })
+          }
           id='comment'
-          value={data.comment}
+          value={postData.postObjective}
         ></textarea>
 
         <br />
         {/* Upload your image here to display */}
         <div>
           <label>Select File</label>
-          <input
+          <FileBase
             type='file'
-            id='postImage'
-            value={data.postImage}
-            onChange={(e) => handleChange(e)}
-          ></input>
+            multiple={false}
+            onDone={({ base64 }) =>
+              setPostData({ ...postData, postImage: base64 })
+            }
+          ></FileBase>
         </div>
 
         <button>Create Post</button>

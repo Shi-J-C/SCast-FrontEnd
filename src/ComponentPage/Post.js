@@ -7,7 +7,6 @@ export default function Post() {
   const { id, index } = useParams()
   const [module, setModule] = useState([])
   const [post, setPost] = useState([])
-  const [commentArea, setCommmentArea] = useState(false)
   const [replyArea, setReplyArea] = useState(false)
 
   useEffect(() => {
@@ -33,13 +32,11 @@ export default function Post() {
           <div className='authors'>Author</div>
           <div className='content'>
             {post.postType} : {post.postTitle}
-            <img src={`${post.postImage}`} alt=''></img>
           </div>
           <div className='postreply'>
             <button
               onClick={() => {
                 setReplyArea(!replyArea)
-                setCommmentArea(false)
               }}
             >
               Post Reply
@@ -57,43 +54,22 @@ export default function Post() {
               Posted By
               <br />
               {post.userId}
-              <br />
-              This Data and Time
+              {/* <br />
+              This Data and Time */}
             </div>
           </div>
 
           <div className='content'>
-            {post.text}
-            <hr />
-            Regards {post.userId}
-            <img src={`${post.postImage}`} alt=''></img>
-            <div className='comment'>
-              <button
-                onClick={() => {
-                  setCommmentArea(!commentArea)
-                  setReplyArea(false)
-                }}
-              >
-                Reply
-              </button>
-            </div>
+            {post.postObjective}
+            <br />
+            {post.postImage ? 'Image' : ''}
+            <br />
+            {post.postImage ? <img src={`${post.postImage}`} alt=''></img> : ''}
+            {/* <hr />
+            Regards {post.userId} */}
           </div>
         </div>
       </div>
-
-      {/* Comment area */}
-      {commentArea ? (
-        <div className='comment-area'>
-          <textarea
-            name='comment'
-            id=''
-            placeholder='comment here ... '
-          ></textarea>
-          <input type='submit' name='' id='' value='submit'></input>
-        </div>
-      ) : (
-        ''
-      )}
 
       {/* Reply area */}
       {replyArea ? (
