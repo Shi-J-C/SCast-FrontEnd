@@ -10,11 +10,14 @@ export default function Posts() {
   const { id } = useParams()
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
       setModule(res.data)
       setPosts(res.data.post)
-      console.log(posts)
     })
+    return () => {
+      source.cancel()
+    }
   }, [])
 
   let navigate = useNavigate()

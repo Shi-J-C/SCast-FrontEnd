@@ -2,16 +2,18 @@ import axios from 'axios'
 import FileBase from 'react-file-base64'
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import Post from './Post'
 
 export default function CreatePost() {
   const { id } = useParams()
   const [moduleCode, setModuleCode] = useState('')
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/module/${id}`).then((res) => {
-      setModuleCode(res.data.moduleCode)
-    })
+    axios
+      .get(`http://localhost:3000/module/${id}`)
+      .then((res) => {
+        setModuleCode(res.data.moduleCode)
+      })
+      .catch((err) => console.log(err.data))
   }, [])
 
   const url = `http://localhost:3000/post/${id}/addPost`
@@ -26,8 +28,8 @@ export default function CreatePost() {
 
   function handleSubmit(e) {
     // e.preventDefault()
-    // axios.post(url, postData).then((res) => console.log(res.data))
-    axios.post(url, postData)
+    axios.post(url, postData).then((res) => console.log(res.data))
+    // axios.post(url, postData)
     console.log(postData)
     alert('Create Post successfully')
   }

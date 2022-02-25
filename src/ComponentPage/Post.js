@@ -10,11 +10,16 @@ export default function Post() {
   const [replyArea, setReplyArea] = useState(false)
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
       setModule(res.data)
       setPost(res.data.post[index])
       console.log(post)
     })
+
+    return () => {
+      source.cancel()
+    }
   }, [])
 
   return (

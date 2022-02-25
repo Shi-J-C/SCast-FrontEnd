@@ -42,24 +42,23 @@ export default function UpdateModule() {
   }
 
   const handleEditFormChange = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const newFormData = { ...editFormData }
     newFormData[e.target.id] = e.target.value
     setEditFormData(newFormData)
-    console.log(newFormData)
+    // console.log(newFormData)
   }
   function handleSubmit(e) {
     const editedModule = {
-      _id: editFormData._id,
       moduleCode: editFormData.moduleCode,
       moduleName: editFormData.moduleName,
       post: editFormData.post,
     }
-    console.log('Updated data', editedModule)
-
-    axios
-      .post('http://localhost:3000/updateModule', editedModule)
-      .then((res) => console.log(res.data))
+    axios.post(
+      `http://localhost:3000/module/${editFormData._id}/updateModule`,
+      editedModule
+    )
+    alert(`Module updated to ${editedModule.moduleCode}`)
   }
 
   return (

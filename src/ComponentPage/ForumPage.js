@@ -11,10 +11,14 @@ export default function ForumPage() {
   const [showY4, setShowY4] = useState(true)
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
     axios.get('http://localhost:3000/module').then((res) => {
-      console.log(res.data)
       setModuleData(res.data)
     })
+
+    return () => {
+      source.cancel()
+    }
   }, [])
 
   return (
