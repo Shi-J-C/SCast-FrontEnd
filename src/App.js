@@ -6,10 +6,10 @@ import Forum from './ComponentPage/ForumPage'
 import Home from './ComponentPage/Home'
 import About from './ComponentPage/About'
 import Posts from './ComponentPage/Posts'
-import CreateModule from './ComponentPage/CreateModule'
+import CreateModule from './Admin/CreateModule'
 import Post from './ComponentPage/Post'
 import CreatePost from './ComponentPage/CreatePost'
-import UpdateModule from './ComponentPage/UpdateModule'
+import UpdateModule from './Admin/UpdateModule'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route path='/forum/:id' element={<Posts />}></Route>
           <Route path='/forum/:id/createpost' element={<CreatePost />}></Route>
           <Route path='/forum/:id/posts/:index' element={<Post />}></Route>
-          <Route path='/createmodule' element={<CreateModule />}></Route>
+          {/* <Route path='/createmodule' element={<CreateModule />}></Route> */}
           <Route path='/updatemodule' element={<UpdateModule />}></Route>
         </Routes>
       </Router>

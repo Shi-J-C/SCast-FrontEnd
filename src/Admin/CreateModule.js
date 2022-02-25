@@ -17,7 +17,6 @@ export default function CreateModule() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
     axios
       .post(url, {
         moduleCode: data.moduleCode,
@@ -25,6 +24,7 @@ export default function CreateModule() {
         post: [],
       })
       .then((res) => console.log(res.data))
+    alert(`Created Module ${data.moduleCode}`)
   }
 
   return (
@@ -34,22 +34,24 @@ export default function CreateModule() {
         <input
           placeholder='Enter Module Code'
           type='text'
-          onChange={(e) => handleChange(e)}
           id='moduleCode'
           value={data.moduleCode}
+          onChange={(e) => handleChange(e)}
+          required='required'
         ></input>
 
         {/* Enter module name */}
         <input
           placeholder='Enter Module Name'
           type='text'
-          onChange={(e) => handleChange(e)}
           id='moduleName'
           value={data.moduleName}
+          required='required'
+          onChange={(e) => handleChange(e)}
         ></input>
 
         {/* click to submit */}
-        <button>Submit</button>
+        <button>Add</button>
       </form>
     </div>
   )
