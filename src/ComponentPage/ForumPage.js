@@ -11,14 +11,9 @@ export default function ForumPage() {
   const [showY4, setShowY4] = useState(true)
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
     axios.get('http://localhost:3000/module').then((res) => {
       setModuleData(res.data)
     })
-
-    return () => {
-      source.cancel()
-    }
   }, [])
 
   return (
@@ -110,7 +105,7 @@ export default function ForumPage() {
         </div>
       </div>
 
-      <div className='forum-info'>
+      {/* <div className='forum-info'>
         <div className='chart'>
           SCast - States &nbsp;
           <FaChartBar />
@@ -119,15 +114,15 @@ export default function ForumPage() {
           <span>
             <u>5,300 </u> Posts in <u>1,200</u> Topics by 123,123 Users
           </span>
-          {/* <span>
+          <span>
             Latest Post:
             <b>
               <a href='#'>Random Post</a>
             </b>
             on 15 Dec 2021 by <a href='#'>RandomUser</a>
-          </span> */}
+          </span>
         </div>
-      </div>
+      </div> */}
 
       <footer>
         <span>&copy;&nbsp;SCast | All rights Reserved.</span>
