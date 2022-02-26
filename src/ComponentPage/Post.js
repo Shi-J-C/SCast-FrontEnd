@@ -158,7 +158,7 @@ export default function Post() {
                 }
               ></FileBase>
             </div>
-            <Button onClick={handleReplySubmit}>click me</Button>
+            <Button onClick={handleReplySubmit}>Submit</Button>
           </form>
         </div>
       ) : (
