@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import FileBase from "react-file-base64";
 import React, { useState, useEffect } from "react";
 import { TextField } from "@material-ui/core";
 import Button from "@mui/material/Button";
@@ -8,19 +9,20 @@ export default function Post() {
   const { id, index } = useParams();
   const [module, setModule] = useState([]);
   const [post, setPost] = useState([]);
-  const [reply, setReply] = useState([]);
+  const [reply, setReply] = useState([
+    { userId: "", commentText: "", commentImage: "" },
+  ]);
   const [comment, setComment] = useState([]);
 
   const [replyArea, setReplyArea] = useState(false);
 
-  const handleReply = (e) => {
+  const handleReplySubmit = (e) => {
     e.preventDefault();
-    console.log(comment);
-  };
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setReply(e.target.value);
+    let temp = comment;
+    temp = [...temp, reply];
+    setComment(temp);
+    post.comment = temp;
+    console.log(post);
   };
 
   // const changeComment = (comments) => {
@@ -117,6 +119,12 @@ export default function Post() {
                   <br />
                   {data.commentImage ? "Image" : ""}
                   <br />
+                  {data.commentImage ? (
+                    <img src={`${data.commentImage}`} alt=""></img>
+                  ) : (
+                    ""
+                  )}
+                  <br />
                 </div>
               </div>
             </div>
@@ -135,9 +143,22 @@ export default function Post() {
               name="reply"
               id=""
               placeholder="reply to post... "
-              onChange={handleChange}
+              onChange={(e) =>
+                setReply({ ...reply, commentText: e.target.value })
+              }
             />
-            <Button onClick={handleReply}>click me</Button>
+            <div>
+              {/* upload image */}
+              <label>Select File</label>
+              <FileBase
+                type="file"
+                multiple={false}
+                onDone={({ base64 }) =>
+                  setReply({ ...reply, commentImage: base64 })
+                }
+              ></FileBase>
+            </div>
+            <Button onClick={handleReplySubmit}>click me</Button>
           </form>
         </div>
       ) : (
