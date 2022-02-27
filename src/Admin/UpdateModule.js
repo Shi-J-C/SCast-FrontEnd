@@ -26,6 +26,7 @@ export default function UpdateModule() {
     _id: '',
     moduleCode: '',
     moduleName: '',
+    post: [],
   })
 
   const handleEditClick = (e, module) => {
@@ -35,6 +36,7 @@ export default function UpdateModule() {
       _id: module._id,
       moduleCode: module.moduleCode,
       moduleName: module.moduleName,
+      post: module.post,
     }
     setEditFormData(formValues)
   }
@@ -50,9 +52,12 @@ export default function UpdateModule() {
 
   const handleSubmit = (e) => {
     const editedModule = {
+      _id: editFormData._id,
       moduleCode: editFormData.moduleCode,
       moduleName: editFormData.moduleName,
+      post: editFormData.post,
     }
+    console.log(editedModule)
     axios.post(
       `http://localhost:3000/module/${editFormData._id}/updateModule`,
       editedModule
