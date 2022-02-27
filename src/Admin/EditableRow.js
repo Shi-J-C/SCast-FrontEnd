@@ -1,12 +1,16 @@
 import React from 'react'
-import axios from 'axios'
 import TableRow from '@mui/material/TableRow'
 import TableCell from '@mui/material/TableCell'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
 import Button from '@mui/material/Button'
 import CancelIcon from '@mui/icons-material/Cancel'
 
-function EditableRow({ editFormData, handleEditFormChange, handleSubmit }) {
+function EditableRow({
+  editFormData,
+  handleSubmit,
+  setEditModuleId,
+  setEditFormData,
+}) {
   return (
     <TableRow>
       <TableCell>
@@ -16,7 +20,9 @@ function EditableRow({ editFormData, handleEditFormChange, handleSubmit }) {
           placeholder='Enter a module code'
           id='moduleCode'
           value={editFormData.moduleCode}
-          onChange={(e) => handleEditFormChange(e)}
+          onChange={(e) =>
+            setEditFormData({ ...editFormData, moduleCode: e.target.value })
+          }
         ></input>
       </TableCell>
       <TableCell>
@@ -26,22 +32,29 @@ function EditableRow({ editFormData, handleEditFormChange, handleSubmit }) {
           placeholder='Enter a module name'
           id='moduleName'
           value={editFormData.moduleName}
-          onChange={(e) => handleEditFormChange(e)}
+          onChange={(e) =>
+            setEditFormData({ ...editFormData, moduleName: e.target.value })
+          }
         ></input>
       </TableCell>
       <TableCell>
         <Button
           variant='outlined'
           startIcon={<SaveAsIcon />}
-          onClick={() => {
+          onClick={(e) => {
             handleSubmit()
+            setEditModuleId('')
           }}
         >
           Save
         </Button>
       </TableCell>
       <TableCell>
-        <Button variant='outlined' startIcon={<CancelIcon />}>
+        <Button
+          variant='outlined'
+          startIcon={<CancelIcon />}
+          onClick={(e) => setEditModuleId('')}
+        >
           Cancel
         </Button>
       </TableCell>

@@ -20,13 +20,12 @@ export default function UpdateModule() {
       // console.log(res.data)
       setModuleData(res.data)
     })
-  }, [])
+  }, [editModuleId])
 
   const [editFormData, setEditFormData] = useState({
     _id: '',
     moduleCode: '',
     moduleName: '',
-    post: [],
   })
 
   const handleEditClick = (e, module) => {
@@ -36,29 +35,29 @@ export default function UpdateModule() {
       _id: module._id,
       moduleCode: module.moduleCode,
       moduleName: module.moduleName,
-      post: module.post,
     }
     setEditFormData(formValues)
   }
 
-  const handleEditFormChange = (e) => {
-    // e.preventDefault()
-    const newFormData = { ...editFormData }
-    newFormData[e.target.id] = e.target.value
-    setEditFormData(newFormData)
-    // console.log(newFormData)
-  }
-  function handleSubmit(e) {
+  //Not necessary function
+  // const handleEditFormChange = (e) => {
+  //   // e.preventDefault()
+  //   const newFormData = { ...editFormData }
+  //   newFormData[e.target.id] = e.target.value
+  //   setEditFormData(newFormData)
+  //   // console.log(newFormData)
+  // }
+
+  const handleSubmit = (e) => {
     const editedModule = {
       moduleCode: editFormData.moduleCode,
       moduleName: editFormData.moduleName,
-      post: editFormData.post,
     }
     axios.post(
       `http://localhost:3000/module/${editFormData._id}/updateModule`,
       editedModule
     )
-    alert(`Module updated to ${editedModule.moduleCode}`)
+    alert(`Module information updated`)
   }
 
   return (
@@ -79,8 +78,10 @@ export default function UpdateModule() {
                 {editModuleId === module._id ? (
                   <EditableRow
                     editFormData={editFormData}
-                    handleEditFormChange={handleEditFormChange}
+                    // handleEditFormChange={handleEditFormChange}
                     handleSubmit={handleSubmit}
+                    setEditModuleId={setEditModuleId}
+                    setEditFormData={setEditFormData}
                   />
                 ) : (
                   <ReadOnlyRow
