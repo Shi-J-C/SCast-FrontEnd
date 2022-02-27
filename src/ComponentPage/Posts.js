@@ -56,9 +56,7 @@ export default function Posts() {
               <br />
               <span>Started by {d.userId}</span>
             </div>
-            <div className='replies'>
-              {d.comment.length} replies <br /> 125 views
-            </div>
+            <div className='replies'>{d.comment.length} replies</div>
             <div className='last-reply'>
               12 Oct 2021
               <br />
