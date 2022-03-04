@@ -5,10 +5,12 @@ import { TextField } from "@material-ui/core";
 import { Paper, Container, Avatar, Typography, Button } from "@mui/material";
 import { Grid } from "@material-ui/core";
 import FileBase from "react-file-base64";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
 const SignUpSignIn = () => {
+  let navigate = useNavigate();
   const initialState = {
     name: "",
     username: "",
@@ -39,8 +41,6 @@ const SignUpSignIn = () => {
           userimage: form.userimage,
           password: form.password,
         };
-        console.log(temp);
-        localStorage.setItem("user", JSON.stringify(temp));
         axios
           .post(`http://localhost:3000/user/addUser`, temp)
           .then((res) => console.log(res.data));
@@ -53,6 +53,14 @@ const SignUpSignIn = () => {
         password: form.password,
       };
       // call log in api
+      axios.post(`http://localhost:3000/user/signIn`, temp).then((res) => {
+        if (res.data.error) {
+          alert(res.data.error);
+        } else {
+          sessionStorage.setItem("accessToken", res.data);
+          navigate("/");
+        }
+      });
     }
   };
 
