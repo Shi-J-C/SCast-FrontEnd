@@ -14,6 +14,7 @@ import EditableRow from './EditableRow'
 export default function UpdateModule() {
   const [moduleData, setModuleData] = useState([])
   const [editModuleId, setEditModuleId] = useState(null)
+  const [deleteModuleId, setDeleteModuleId] = useState({ moduleId: '' })
 
   useEffect(() => {
     axios.get('http://localhost:3000/module').then((res) => {
@@ -65,6 +66,16 @@ export default function UpdateModule() {
     alert(`Module information updated`)
   }
 
+  const handleDelete = (e, module) => {
+    // setDeleteModuleId({ ...deleteModuleId, moduleId: module._id })
+    console.log('moduleId: ', deleteModuleId)
+    axios
+      .post(`http://localhost:3000/module/deleteModule`, deleteModuleId)
+      .then((res) => console.log(res))
+
+    alert('Module deleted')
+  }
+
   return (
     <TableContainer component={Paper}>
       <form>
@@ -92,6 +103,9 @@ export default function UpdateModule() {
                   <ReadOnlyRow
                     module={module}
                     handleEditClick={handleEditClick}
+                    handleDelete={handleDelete}
+                    deleteModuleId={deleteModuleId}
+                    setDeleteModuleId={setDeleteModuleId}
                   />
                 )}
               </Fragment>

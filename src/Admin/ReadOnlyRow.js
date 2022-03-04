@@ -5,7 +5,13 @@ import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 
-const ReadOnlyRow = ({ module, handleEditClick }) => {
+const ReadOnlyRow = ({
+  module,
+  handleEditClick,
+  handleDelete,
+  setDeleteModuleId,
+  deleteModuleId,
+}) => {
   return (
     <TableRow>
       <TableCell>{module.moduleCode}</TableCell>
@@ -21,7 +27,14 @@ const ReadOnlyRow = ({ module, handleEditClick }) => {
         </Button>
       </TableCell>
       <TableCell>
-        <Button variant='outlined' startIcon={<DeleteIcon />}>
+        <Button
+          variant='outlined'
+          startIcon={<DeleteIcon />}
+          onClick={(e) => {
+            setDeleteModuleId({ ...deleteModuleId, moduleId: module._id })
+            handleDelete(e, module)
+          }}
+        >
           Delete
         </Button>
       </TableCell>
