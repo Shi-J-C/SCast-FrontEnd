@@ -14,7 +14,6 @@ import EditableRow from './EditableRow'
 export default function UpdateModule() {
   const [moduleData, setModuleData] = useState([])
   const [editModuleId, setEditModuleId] = useState(null)
-  const [deleteModuleId, setDeleteModuleId] = useState({ moduleId: '' })
 
   useEffect(() => {
     axios.get('http://localhost:3000/module').then((res) => {
@@ -67,13 +66,12 @@ export default function UpdateModule() {
   }
 
   const handleDelete = (e, module) => {
-    // setDeleteModuleId({ ...deleteModuleId, moduleId: module._id })
-    console.log('moduleId: ', deleteModuleId)
+    setEditModuleId(module._id)
     axios
-      .post(`http://localhost:3000/module/deleteModule`, deleteModuleId)
+      .post(`http://localhost:3000/module/${module._id}/deleteModule`)
       .then((res) => console.log(res))
 
-    alert('Module deleted')
+    alert(`Module ${module.moduleCode} deleted`)
   }
 
   return (
@@ -104,8 +102,6 @@ export default function UpdateModule() {
                     module={module}
                     handleEditClick={handleEditClick}
                     handleDelete={handleDelete}
-                    deleteModuleId={deleteModuleId}
-                    setDeleteModuleId={setDeleteModuleId}
                   />
                 )}
               </Fragment>
