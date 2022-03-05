@@ -31,14 +31,13 @@ const SignUpSignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(form);
 
     if (isSignup) {
       if (form.password === form.confirmPassword) {
         let temp = {
           name: form.name,
           username: form.username,
-          userimage: form.userimage,
+          imageURL: form.userimage,
           password: form.password,
         };
         axios
@@ -52,15 +51,16 @@ const SignUpSignIn = () => {
         username: form.username,
         password: form.password,
       };
-      // call log in api
-      axios.post(`http://localhost:3000/user/signIn`, temp).then((res) => {
-        if (res.data.error) {
-          alert(res.data.error);
-        } else {
-          sessionStorage.setItem("accessToken", res.data);
-          navigate("/");
-        }
-      });
+      axios
+        .post(`http://localhost:3000/user/login`, temp)
+        .then((res) => {
+          sessionStorage.setItem("accessToken", res.data.token);
+          sessionStorage.setItem("user", JSON.stringify(res.data.user));
+          navigate("/", { replace: true });
+        })
+        .catch(function (error) {
+          alert(error.response.data.message);
+        });
     }
   };
 
@@ -97,6 +97,7 @@ const SignUpSignIn = () => {
                   <TextField
                     name="name"
                     label="Name"
+                    value={form.name}
                     onChange={handleChange}
                     autoFocus
                   />
@@ -105,12 +106,14 @@ const SignUpSignIn = () => {
               <TextField
                 name="username"
                 label="User Name"
+                value={form.username}
                 onChange={handleChange}
-                type="email"
+                // type="email"
               />
               <TextField
                 name="password"
                 label="Password"
+                value={form.password}
                 onChange={handleChange}
                 type="password"
               />
@@ -119,6 +122,7 @@ const SignUpSignIn = () => {
                   <TextField
                     name="confirmPassword"
                     label="Repeat Password"
+                    value={form.confirmPassword}
                     onChange={handleChange}
                     type="password"
                   />
