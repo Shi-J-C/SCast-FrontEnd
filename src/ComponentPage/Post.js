@@ -1,71 +1,80 @@
-import { Link, useParams } from 'react-router-dom'
-import FileBase from 'react-file-base64'
-import React, { useState, useEffect } from 'react'
-import { TextField } from '@material-ui/core'
-import Button from '@mui/material/Button'
-import axios from 'axios'
+import { Link, useParams } from "react-router-dom";
+import FileBase from "react-file-base64";
+import React, { useState, useEffect } from "react";
+import { TextField } from "@material-ui/core";
+import Button from "@mui/material/Button";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Post() {
-  const { id, index } = useParams()
-  const [module, setModule] = useState([])
-  const [post, setPost] = useState([])
+  const { id, index } = useParams();
+  const [module, setModule] = useState([]);
+  const [post, setPost] = useState([]);
+  let navigate = useNavigate();
 
   const [reply, setReply] = useState({
-    postId: '',
-    userId: 'jasper',
-    commentText: '',
-    commentImage: '',
-  })
+    postId: "",
+    userId: "",
+    commentText: "",
+    commentImage: "",
+  });
 
-  const [replyArea, setReplyArea] = useState(false)
-  const [comment, setComment] = useState([])
+  const [replyArea, setReplyArea] = useState(false);
+  const [comment, setComment] = useState([]);
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
+    const source = axios.CancelToken.source();
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
-      setModule(res.data)
-      setPost(res.data.post[index])
+      setModule(res.data);
+      setPost(res.data.post[index]);
       //changeComment(res.data.post[index].comment);
-      setComment(res.data.post[index].comment)
-    })
+      setComment(res.data.post[index].comment);
+    });
 
     return () => {
-      source.cancel()
-    }
-  }, [])
+      source.cancel();
+    };
+  }, []);
 
   const handleReplySubmit = (e) => {
-    e.preventDefault()
-    let temp = comment
-    temp = [...temp, reply]
-    setComment(temp)
-    reply.postId = post._id
-    console.log(reply)
-    axios
-      .post(`http://localhost:3000/comment/${id}/addcomment`, reply)
-      .then((res) => console.log(res.data))
-  }
+    e.preventDefault();
+    let user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+      let temp = comment;
+      reply.userId = user.name;
+      temp = [...temp, reply];
+      setComment(temp);
+      reply.postId = post._id;
+      console.log(reply);
+      axios
+        .post(`http://localhost:3000/comment/${id}/addcomment`, reply)
+        .then((res) => console.log(res.data));
+    } else {
+      alert("Please sign up or sign in with us before reply.");
+      navigate("/auth", { replace: true });
+    }
+  };
 
   return (
     <div>
-      <div className='navigate'>
+      <div className="navigate">
         <span>
-          <Link to={'/forum'}>SCast Forum - Forum</Link> {'>>'}{' '}
-          <Link to={`/forum/${id}`}>{module.moduleCode}</Link> {'>>'}{' '}
+          <Link to={"/forum"}>SCast Forum - Forum</Link> {">>"}{" "}
+          <Link to={`/forum/${id}`}>{module.moduleCode}</Link> {">>"}{" "}
           {post.postTitle}
         </span>
       </div>
       {/*========================author area=========================*/}
-      <div className='topic-container'>
-        <div className='head'>
-          <div className='authors'>Author</div>
-          <div className='content'>
+      <div className="topic-container">
+        <div className="head">
+          <div className="authors">Author</div>
+          <div className="content">
             {post.postType} : {post.postTitle}
           </div>
-          <div className='postreply'>
+          <div className="postreply">
             <button
               onClick={() => {
-                setReplyArea(!replyArea)
+                setReplyArea(!replyArea);
               }}
             >
               Post Reply
@@ -73,13 +82,13 @@ export default function Post() {
           </div>
         </div>
 
-        <div className='body'>
-          <div className='authors'>
+        <div className="body">
+          <div className="authors">
             <img
-              src='https://cdn.pixabay.com/photo/2014/04/05/13/05/boy-317041__340.jpg'
-              alt=''
+              src="https://cdn.pixabay.com/photo/2014/04/05/13/05/boy-317041__340.jpg"
+              alt=""
             ></img>
-            <div className='username'>
+            <div className="username">
               Posted By
               <br />
               {post.userId}
@@ -88,12 +97,12 @@ export default function Post() {
             </div>
           </div>
 
-          <div className='content'>
+          <div className="content">
             {post.postObjective}
             <br />
-            {post.postImage ? 'Image' : ''}
+            {post.postImage ? "Image" : ""}
             <br />
-            {post.postImage ? <img src={`${post.postImage}`} alt=''></img> : ''}
+            {post.postImage ? <img src={`${post.postImage}`} alt=""></img> : ""}
             {/* <hr />
             Regards {post.userId} */}
           </div>
@@ -103,29 +112,29 @@ export default function Post() {
         <section>
           {comment.map((data, index) => (
             <div key={index}>
-              <div className='head'>Comment</div>
-              <div className='body'>
-                <div className='authors'>
+              <div className="head">Comment</div>
+              <div className="body">
+                <div className="authors">
                   <img
-                    src='https://cdn.pixabay.com/photo/2014/04/05/13/05/boy-317041__340.jpg'
-                    alt=''
+                    src="https://cdn.pixabay.com/photo/2014/04/05/13/05/boy-317041__340.jpg"
+                    alt=""
                   ></img>
-                  <div className='username'>
+                  <div className="username">
                     Posted By
                     <br />
                     {data.userId}
                   </div>
                 </div>
 
-                <div className='content'>
+                <div className="content">
                   {data.commentText}
                   <br />
-                  {data.commentImage ? 'Image' : ''}
+                  {data.commentImage ? "Image" : ""}
                   <br />
                   {data.commentImage ? (
-                    <img src={`${data.commentImage}`} alt=''></img>
+                    <img src={`${data.commentImage}`} alt=""></img>
                   ) : (
-                    ''
+                    ""
                   )}
                   <br />
                 </div>
@@ -141,11 +150,11 @@ export default function Post() {
           <form>
             <TextField
               style={{
-                background: 'white',
+                background: "white",
               }}
-              id='commentText'
-              placeholder='reply to post... '
-              type='text'
+              id="commentText"
+              placeholder="reply to post... "
+              type="text"
               onChange={(e) =>
                 setReply({ ...reply, commentText: e.target.value })
               }
@@ -154,7 +163,7 @@ export default function Post() {
               {/* upload image */}
               <label>Select File</label>
               <FileBase
-                type='file'
+                type="file"
                 multiple={false}
                 onDone={({ base64 }) =>
                   setReply({ ...reply, commentImage: base64 })
@@ -165,8 +174,8 @@ export default function Post() {
           </form>
         </div>
       ) : (
-        ''
+        ""
       )}
     </div>
-  )
+  );
 }

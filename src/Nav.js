@@ -14,7 +14,6 @@ export default function Nav() {
   };
 
   useEffect(() => {
-    console.log(location);
     let user = JSON.parse(sessionStorage.getItem("user"));
     if (user?.role === "student") {
       async function fetchUserData() {
