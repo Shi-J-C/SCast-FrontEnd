@@ -22,15 +22,21 @@ export default function Posts() {
 
   let navigate = useNavigate()
   const routechange = () => {
-    let path = `/forum/${id}/createpost`
-    navigate(path)
+    let user = JSON.parse(sessionStorage.getItem('user'))
+    if (user) {
+      let path = `/forum/${id}/createpost`
+      navigate(path)
+    } else {
+      alert('Please sign up or sign in with us before reply.')
+      navigate('/auth', { replace: true })
+    }
   }
 
   return (
     <div>
       <div className='navigate'>
         <span>
-          <Link to={'/forum'}>SCast Forum - Forum</Link> {'>>'}
+          <Link to={'/forum'}>SCast Forum</Link> {'>>'}
           {module.moduleCode}
           <button style={{ float: 'right' }} onClick={() => routechange()}>
             Create Post

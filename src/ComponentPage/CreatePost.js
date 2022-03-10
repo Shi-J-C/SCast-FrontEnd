@@ -16,9 +16,11 @@ export default function CreatePost() {
       .catch((err) => console.log(err.data))
   }, [])
 
+  let user = JSON.parse(sessionStorage.getItem('user'))
+
   const url = `http://localhost:3000/post/${id}/addPost`
   const [postData, setPostData] = useState({
-    userId: 'Joann',
+    userId: user.name,
     postTitle: '',
     postImage: '',
     postObjective: '',
@@ -38,7 +40,7 @@ export default function CreatePost() {
       <div className='navigate'>
         <span>
           <span>
-            <Link to={'/forum'}>SCast Forum - Forum</Link> {'>>'}{' '}
+            <Link to={'/forum'}>SCast Forum </Link> {'>>'}{' '}
             <Link to={`/forum/${id}`}>{moduleCode}</Link> {'>>'} {'New Post'}
           </span>
         </span>
