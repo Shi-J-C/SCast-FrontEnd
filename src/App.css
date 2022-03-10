@@ -342,3 +342,15 @@ footer {
 .comments-container {
   margin-top: 20px;
 }
+
+.img-unzoom {
+  max-width: 25%;
+  height: auto;
+}
+
+.img-zoom:hover {
+  transform: scale(2);
+  /* display: inline-block;
+  margin-left: auto;
+  margin-right: auto; */
+}

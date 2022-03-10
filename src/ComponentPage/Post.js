@@ -50,6 +50,7 @@ export default function Post() {
       axios
         .post(`http://localhost:3000/comment/${id}/addcomment`, reply)
         .then((res) => console.log(res.data))
+      setReplyArea(false)
     } else {
       alert('Please sign up or sign in with us before reply.')
       navigate('/auth', { replace: true })
@@ -98,12 +99,36 @@ export default function Post() {
             </div>
           </div>
 
-          <div className='content'>
+          <div
+            className='content'
+            // style={{
+            //   width: '50px',
+            //   height: '50px',
+            //   // textAlign: 'center',
+            //   padding: '15px',
+            // }}
+          >
             {post.postObjective}
             <br />
             {post.postImage ? 'Image' : ''}
             <br />
-            {post.postImage ? <img src={`${post.postImage}`} alt=''></img> : ''}
+
+            <div
+
+            // className='img-unzoom'
+            >
+              {post.postImage ? (
+                <img
+                  className='img-zoom'
+                  style={{ maxWidth: '25%', height: 'auto' }}
+                  src={`${post.postImage}`}
+                  alt=''
+                ></img>
+              ) : (
+                ''
+              )}
+            </div>
+
             {/* <hr />
             Regards {post.userId} */}
           </div>
@@ -132,12 +157,18 @@ export default function Post() {
                   <br />
                   {data.commentImage ? 'Image' : ''}
                   <br />
-                  {data.commentImage ? (
-                    <img src={`${data.commentImage}`} alt=''></img>
-                  ) : (
-                    ''
-                  )}
-                  <br />
+                  <div>
+                    {data.commentImage ? (
+                      <img
+                        className='img-zoom'
+                        style={{ maxWidth: '25%', height: 'auto' }}
+                        src={`${data.commentImage}`}
+                        alt=''
+                      ></img>
+                    ) : (
+                      ''
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
