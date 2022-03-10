@@ -120,7 +120,6 @@ export default function Post() {
               {post.postImage ? (
                 <img
                   className='img-zoom'
-                  style={{ maxWidth: '25%', height: 'auto' }}
                   src={`${post.postImage}`}
                   alt=''
                 ></img>
@@ -161,7 +160,6 @@ export default function Post() {
                     {data.commentImage ? (
                       <img
                         className='img-zoom'
-                        style={{ maxWidth: '25%', height: 'auto' }}
                         src={`${data.commentImage}`}
                         alt=''
                       ></img>
@@ -184,6 +182,8 @@ export default function Post() {
               style={{
                 background: 'white',
               }}
+              fullWidth
+              label='Reply Box'
               id='commentText'
               placeholder='reply to post... '
               type='text'
