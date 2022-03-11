@@ -6,12 +6,17 @@ import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import axios from 'axios'
 
-const ReadOnlyRow = ({ module, handleEditClick, handleDelete }) => {
+const ReadOnlyRow = ({
+  module,
+  handleEditClick,
+  handleDelete,
+  StyledTableCell,
+}) => {
   return (
     <TableRow>
-      <TableCell>{module.moduleCode}</TableCell>
-      <TableCell>{module.moduleName}</TableCell>
-      <TableCell>
+      <StyledTableCell>{module.moduleCode}</StyledTableCell>
+      <StyledTableCell>{module.moduleName}</StyledTableCell>
+      <StyledTableCell>
         <Button
           variant='outlined'
           startIcon={<EditIcon />}
@@ -20,8 +25,8 @@ const ReadOnlyRow = ({ module, handleEditClick, handleDelete }) => {
         >
           Edit
         </Button>
-      </TableCell>
-      <TableCell>
+      </StyledTableCell>
+      <StyledTableCell>
         <Button
           variant='outlined'
           startIcon={<DeleteIcon />}
@@ -31,7 +36,7 @@ const ReadOnlyRow = ({ module, handleEditClick, handleDelete }) => {
         >
           Delete
         </Button>
-      </TableCell>
+      </StyledTableCell>
     </TableRow>
   )
 }

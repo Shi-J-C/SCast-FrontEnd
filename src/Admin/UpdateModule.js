@@ -3,13 +3,14 @@ import axios from 'axios'
 import CreateModule from './CreateModule'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
+import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import ReadOnlyRow from './ReadOnlyRow'
 import EditableRow from './EditableRow'
+import { styled } from '@mui/material/styles'
 
 export default function UpdateModule() {
   const [moduleData, setModuleData] = useState([])
@@ -41,14 +42,15 @@ export default function UpdateModule() {
     setEditFormData(formValues)
   }
 
-  //Not necessary function
-  // const handleEditFormChange = (e) => {
-  //   // e.preventDefault()
-  //   const newFormData = { ...editFormData }
-  //   newFormData[e.target.id] = e.target.value
-  //   setEditFormData(newFormData)
-  //   // console.log(newFormData)
-  // }
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }))
 
   const handleSubmit = (e) => {
     const editedModule = {
@@ -80,13 +82,13 @@ export default function UpdateModule() {
       style={{ border: 'solid', borderWidth: 'thin' }}
     >
       <form>
-        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <Table sx={{ minWidth: 700 }} aria-label='customized table'>
           <TableHead>
             <TableRow>
-              <TableCell>Module Code</TableCell>
-              <TableCell>Module Name</TableCell>
-              <TableCell>Update</TableCell>
-              <TableCell>Delete</TableCell>
+              <StyledTableCell>Module Code</StyledTableCell>
+              <StyledTableCell>Module Name</StyledTableCell>
+              <StyledTableCell>Update</StyledTableCell>
+              <StyledTableCell>Delete</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -105,6 +107,7 @@ export default function UpdateModule() {
                     module={module}
                     handleEditClick={handleEditClick}
                     handleDelete={handleDelete}
+                    StyledTableCell={StyledTableCell}
                   />
                 )}
               </Fragment>
