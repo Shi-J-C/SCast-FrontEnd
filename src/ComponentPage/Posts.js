@@ -3,6 +3,7 @@ import { FaFire } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Button from '@mui/material/Button'
 
 export default function Posts() {
   const [posts, setPosts] = useState([])
@@ -14,6 +15,7 @@ export default function Posts() {
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
       setModule(res.data)
       setPosts(res.data.post)
+      // console.log(posts[0].comment[posts[0].comment.length - 1].userId)
     })
     return () => {
       source.cancel()
@@ -38,9 +40,15 @@ export default function Posts() {
         <span>
           <Link to={'/forum'}>SCast Forum</Link> {'>>'}
           {module.moduleCode}
-          <button style={{ float: 'right' }} onClick={() => routechange()}>
+          <Button
+            style={{ float: 'right' }}
+            onClick={() => routechange()}
+            // variant='contained'
+            color='inherit'
+            variant='outlined'
+          >
             Create Post
-          </button>
+          </Button>
         </span>
       </div>
 
@@ -66,7 +74,9 @@ export default function Posts() {
             <div className='last-reply'>
               12 Oct 2021
               <br />
-              By Joal
+              {d.comment.length
+                ? `By ${d.comment[d.comment.length - 1].userId}`
+                : 'No Reply'}
             </div>
           </div>
         ))}

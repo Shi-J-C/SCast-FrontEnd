@@ -7,6 +7,7 @@ export default function ForumDetail({
   moduleCode,
   moduleName,
   createdAt,
+  post,
 }) {
   var str = createdAt
   var res = str.substring(0, 10)
@@ -30,14 +31,12 @@ export default function ForumDetail({
           {/* 25 Posts | 15 Replies */}
         </span>
       </div>
-      <div className='subforum-info subforum-column '>
-        <b>
-          <a href='google.com'>Last Post </a>
-        </b>
-        by
-        <a href='gooogle.com'> JustAUser</a>
-        <br />
-        on <small>22 dec 2021</small>
+      <div className='subforum-info subforum-column center'>
+        <span>
+          {post.length} Posts since
+          <br />
+          {res}
+        </span>
       </div>
     </div>
   )

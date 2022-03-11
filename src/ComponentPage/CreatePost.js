@@ -14,7 +14,7 @@ export default function CreatePost() {
         setModuleCode(res.data.moduleCode)
       })
       .catch((err) => console.log(err.data))
-  }, [])
+  }, [moduleCode])
 
   let user = JSON.parse(sessionStorage.getItem('user'))
 

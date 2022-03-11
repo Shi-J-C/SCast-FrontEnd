@@ -19,7 +19,7 @@ export default function Post() {
     commentImage: '',
   })
 
-  const [replyArea, setReplyArea] = useState(false)
+  // const [replyArea, setReplyArea] = useState(false)
   const [comment, setComment] = useState([])
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function Post() {
       axios
         .post(`http://localhost:3000/comment/${id}/addcomment`, reply)
         .then((res) => console.log(res.data))
-      setReplyArea(false)
+      // setReplyArea(false)
     } else {
       alert('Please sign up or sign in with us before reply.')
       navigate('/auth', { replace: true })
@@ -73,15 +73,15 @@ export default function Post() {
           <div className='content'>
             {post.postType} : {post.postTitle}
           </div>
-          <div className='postreply'>
+          {/* <div className='postreply'>
             <button
-              onClick={() => {
-                setReplyArea(!replyArea)
-              }}
+              // onClick={() => {
+              //   setReplyArea(!replyArea)
+              // }}
             >
               Post Reply
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className='body'>
@@ -113,10 +113,7 @@ export default function Post() {
             {post.postImage ? 'Image' : ''}
             <br />
 
-            <div
-
-            // className='img-unzoom'
-            >
+            <div>
               {post.postImage ? (
                 <img
                   className='img-zoom'
@@ -127,9 +124,6 @@ export default function Post() {
                 ''
               )}
             </div>
-
-            {/* <hr />
-            Regards {post.userId} */}
           </div>
         </div>
 
@@ -175,39 +169,38 @@ export default function Post() {
       </div>
 
       {/* Reply area */}
-      {replyArea ? (
-        <div>
-          <form>
-            <TextField
-              style={{
-                background: 'white',
-              }}
-              fullWidth
-              label='Reply Box'
-              id='commentText'
-              placeholder='reply to post... '
-              type='text'
-              onChange={(e) =>
-                setReply({ ...reply, commentText: e.target.value })
+      <div>
+        <form>
+          <TextField
+            style={{
+              background: 'white',
+              border: 'solid',
+              borderWidth: 'thin',
+              marginTop: '20px',
+            }}
+            fullWidth
+            label='Reply Box'
+            id='commentText'
+            placeholder='reply to post... '
+            type='text'
+            onChange={(e) =>
+              setReply({ ...reply, commentText: e.target.value })
+            }
+          />
+          <div>
+            {/* upload image */}
+            <label>Select File</label>
+            <FileBase
+              type='file'
+              multiple={false}
+              onDone={({ base64 }) =>
+                setReply({ ...reply, commentImage: base64 })
               }
-            />
-            <div>
-              {/* upload image */}
-              <label>Select File</label>
-              <FileBase
-                type='file'
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setReply({ ...reply, commentImage: base64 })
-                }
-              ></FileBase>
-            </div>
-            <Button onClick={handleReplySubmit}>Submit</Button>
-          </form>
-        </div>
-      ) : (
-        ''
-      )}
+            ></FileBase>
+          </div>
+          <Button onClick={handleReplySubmit}>Submit</Button>
+        </form>
+      </div>
     </div>
   )
 }

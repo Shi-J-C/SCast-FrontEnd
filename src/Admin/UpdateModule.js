@@ -75,7 +75,10 @@ export default function UpdateModule() {
   }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      style={{ border: 'solid', borderWidth: 'thin' }}
+    >
       <form>
         <Table sx={{ minWidth: 650 }} aria-label='simple table'>
           <TableHead>
