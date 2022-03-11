@@ -73,7 +73,6 @@ const SignUpSignIn = () => {
             border: "solid 1px #52057b",
             marginTop: "20px",
             padding: "20px",
-
             justifyContent: "center",
             boxShadow: "1px 2xp 3px #52057b",
           }}

@@ -4,7 +4,7 @@
 
 html {
   font-size: 14px;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
   background-color: rgb(255, 255, 255);
   color: #000000;
 }
@@ -68,9 +68,9 @@ h1 {
 }
 
 /*nav bar*/
-header {
+/* header {
   margin-inline: 10px;
-}
+} */
 
 .navbar {
   display: flex;
