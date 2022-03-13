@@ -29,7 +29,7 @@ export default function Posts() {
       let path = `/forum/${id}/createpost`;
       navigate(path);
     } else {
-      alert("Please sign up or sign in with us before reply.");
+      alert("Please sign up or sign in with us before posting.");
       navigate("/auth", { replace: true });
     }
   };
