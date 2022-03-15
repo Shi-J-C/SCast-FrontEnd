@@ -1,9 +1,9 @@
-import axios from 'axios'
-import FileBase from 'react-file-base64'
-import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { TextField, Grid } from '@material-ui/core'
-import InputLabel from '@mui/material/InputLabel'
+import axios from "axios";
+import FileBase from "react-file-base64";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { TextField, Grid } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 import {
   Paper,
@@ -12,65 +12,65 @@ import {
   Select,
   MenuItem,
   FormControl,
-} from '@mui/material'
+} from "@mui/material";
 
 export default function CreatePost() {
-  const { id } = useParams()
-  const [moduleCode, setModuleCode] = useState('')
+  let navigate = useNavigate();
+  const { id } = useParams();
+  const [moduleCode, setModuleCode] = useState("");
 
   useEffect(() => {
     axios
       .get(`http://localhost:3000/module/${id}`)
       .then((res) => {
-        setModuleCode(res.data.moduleCode)
+        setModuleCode(res.data.moduleCode);
       })
-      .catch((err) => console.log(err.data))
-  }, [moduleCode])
+      .catch((err) => console.log(err.data));
+  }, [moduleCode]);
 
-  let user = JSON.parse(sessionStorage.getItem('user'))
+  let user = JSON.parse(sessionStorage.getItem("user"));
 
-  const url = `http://localhost:3000/post/${id}/addPost`
+  const url = `http://localhost:3000/post/${id}/addPost`;
   const [postData, setPostData] = useState({
     userId: user._id,
     name: user.name,
-    postTitle: '',
-    postImage: '',
-    postObjective: '',
-    postType: '',
+    postTitle: "",
+    postImage: "",
+    postObjective: "",
+    postType: "",
     comment: [],
-  })
+  });
 
   const handleChange = (e) => {
-    setPostData({ ...postData, [e.target.name]: e.target.value })
-  }
+    setPostData({ ...postData, [e.target.name]: e.target.value });
+  };
 
   function handleSubmit(e) {
-    e.preventDefault()
-    axios.post(url, postData).then((res) => console.log(res.data))
-    // axios.post(url, postData)
-    console.log(postData)
-    alert('Create Post successfully')
+    e.preventDefault();
+    axios.post(url, postData).then((res) => console.log(res.data));
+    alert("Create Post successfully");
+    navigate(`/forum/${id}`, { replace: true });
   }
   return (
     <div>
-      <div className='navigate'>
+      <div className="navigate">
         <span>
           <span>
-            <Link to={'/forum'}>SCast Forum </Link> {'>>'}{' '}
-            <Link to={`/forum/${id}`}>{moduleCode}</Link> {'>>'} {'New Post'}
+            <Link to={"/forum"}>SCast Forum </Link> {">>"}{" "}
+            <Link to={`/forum/${id}`}>{moduleCode}</Link> {">>"} {"New Post"}
           </span>
         </span>
       </div>
 
-      <Container component='main' maxWidth='xs'>
+      <Container component="main" maxWidth="xs">
         <Paper
           elevation={3}
           style={{
-            border: 'solid 1px #52057b',
-            marginTop: '20px',
-            padding: '20px',
-            justifyContent: 'center',
-            boxShadow: '1px 2xp 3px #52057b',
+            border: "solid 1px #52057b",
+            marginTop: "20px",
+            padding: "20px",
+            justifyContent: "center",
+            boxShadow: "1px 2xp 3px #52057b",
           }}
         >
           <FormControl fullWidth>
@@ -78,44 +78,47 @@ export default function CreatePost() {
               <Grid
                 container
                 spacing={2}
-                style={{ display: 'flex', flexDirection: 'column' }}
+                style={{ display: "flex", flexDirection: "column" }}
               >
-                <label id='postType'>Post Type</label>
+                <label id="postType">Post Type</label>
                 <Select
-                  id='demo-simple-select'
+                  id="demo-simple-select"
                   // label="Post Type"
-                  name='postType'
+                  name="postType"
                   value={postData.postType}
                   onChange={handleChange}
+                  required
                 >
-                  <MenuItem value={'Lecture Note'}>Lecture Note</MenuItem>
-                  <MenuItem value={'Tutorial'}>Tutorial</MenuItem>
-                  <MenuItem value={'Lab'}>Lab</MenuItem>
+                  <MenuItem value={"Lecture Note"}>Lecture Note</MenuItem>
+                  <MenuItem value={"Tutorial"}>Tutorial</MenuItem>
+                  <MenuItem value={"Lab"}>Lab</MenuItem>
                 </Select>
                 <TextField
                   // style={{ margin: "5px" }}
-                  name='postTitle'
-                  label='Post Title'
+                  name="postTitle"
+                  label="Post Title"
                   value={postData.postTitle}
                   onChange={handleChange}
+                  required
                   autoFocus
                 />
 
                 <TextField
-                  id='outlined-multiline-flexible'
-                  name='postObjective'
-                  label='Your question'
+                  id="outlined-multiline-flexible"
+                  name="postObjective"
+                  label="Your question"
                   multiline
                   maxRows={4}
                   value={postData.postObjective}
+                  required
                   onChange={handleChange}
-                  type='text'
+                  type="text"
                 />
 
                 <label>Select File</label>
                 <FileBase
-                  style={{ margin: '5px' }}
-                  type='file'
+                  style={{ margin: "5px" }}
+                  type="file"
                   multiple={false}
                   onDone={({ base64 }) =>
                     setPostData({ ...postData, postImage: base64 })
@@ -123,11 +126,11 @@ export default function CreatePost() {
                 ></FileBase>
               </Grid>
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
-                variant='contained'
-                color='primary'
-                style={{ marginTop: '20px' }}
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "20px" }}
                 onClick={() => handleSubmit}
               >
                 Submit
@@ -137,5 +140,5 @@ export default function CreatePost() {
         </Paper>
       </Container>
     </div>
-  )
+  );
 }

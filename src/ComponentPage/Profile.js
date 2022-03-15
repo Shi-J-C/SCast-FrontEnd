@@ -74,7 +74,7 @@ const Profile = () => {
 
               <TextField
                 name="username"
-                label="User Name"
+                label="Email Address"
                 value={userProfile.username}
                 onChange={handleChange}
                 type="email"
