@@ -6,6 +6,7 @@ import {
 } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function ForumDetail({
   _id,
@@ -14,38 +15,39 @@ export default function ForumDetail({
   createdAt,
   post,
 }) {
+  let navigate = useNavigate()
   var str = createdAt
   var res = str.substring(0, 10)
 
   const [userBookmark, setUserBookmark] = useState([])
 
-  let user = JSON.parse(sessionStorage.getItem('user'))
+  var user = JSON.parse(sessionStorage.getItem('user'))
   var newdata = {}
   useEffect(() => {
     async function fetchUserData() {
       let response = await axios.get(`http://localhost:3000/user/${user._id}`)
       setUserBookmark(response.data.bookmark)
     }
-    fetchUserData()
+    if (user) {
+      fetchUserData()
+    }
   }, [newdata])
 
   const handleAddBookmark = () => {
-    newdata = { bookmarkId: _id }
-    console.log('data pass over:', newdata)
-    console.log(
-      'API Link:',
-      `http://localhost:3000/user/${user._id}/addBookmark`
-    )
-    axios.post(`http://localhost:3000/user/${user._id}/addBookmark`, newdata)
+    if (user) {
+      newdata = { bookmarkId: _id }
+      // console.log('data pass over:', newdata)
+      axios.post(`http://localhost:3000/user/${user._id}/addBookmark`, newdata)
+    } else {
+      alert('Please Login')
+      navigate('/auth', { replace: true })
+    }
   }
 
   const handleDeleteBookmark = () => {
     newdata = { bookmarkId: _id }
-    console.log('data pass over:', newdata)
-    console.log(
-      'API Link:',
-      `http://localhost:3000/user/${user._id}/deleteBookmark`
-    )
+    // console.log('data pass over:', newdata)
+
     axios.post(`http://localhost:3000/user/${user._id}/deleteBookmark`, newdata)
   }
 
