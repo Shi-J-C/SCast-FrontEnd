@@ -4,7 +4,7 @@
 
 html {
   font-size: 14px;
-  font-family: "Titillium Web", sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   background-color: rgb(255, 255, 255);
   color: #000000;
 }
@@ -42,7 +42,7 @@ h1 {
 
 .subforum-row {
   display: grid;
-  grid-template-columns: 7% 60% 13% 20%;
+  grid-template-columns: 7% 50% 10% 13% 20%;
   margin: 4px;
   border-radius: 5px;
   background-color: white;
