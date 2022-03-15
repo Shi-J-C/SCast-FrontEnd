@@ -15,6 +15,8 @@ const SignUpSignIn = () => {
     name: "",
     username: "",
     userimage: "",
+    phoneNo: "",
+    telegramId: "",
     password: "",
     confirmPassword: "",
   };
@@ -39,10 +41,12 @@ const SignUpSignIn = () => {
           username: form.username,
           imageURL: form.userimage,
           password: form.password,
+          phoneNo: form.phoneNo,
+          telegramId: form.telegramId,
         };
         axios
           .post(`http://localhost:3000/user/addUser`, temp)
-          .then((res) => console.log(res.data));
+          .then((res) => setForm(initialState));
       } else {
         alert("Your repeat password is different!!");
       }
@@ -98,22 +102,47 @@ const SignUpSignIn = () => {
                     label="Name"
                     value={form.name}
                     onChange={handleChange}
+                    type="text"
+                    required
                     autoFocus
                   />
                 </>
               )}
               <TextField
                 name="username"
-                label="User Name"
+                label="Email Address"
                 value={form.username}
                 onChange={handleChange}
-                // type="email"
+                required
+                type="email"
               />
+              {isSignup && (
+                <>
+                  <TextField
+                    name="phoneNo"
+                    label="Phone Number"
+                    value={form.phoneNo}
+                    onChange={handleChange}
+                    required
+                    type="number"
+                  />
+                  <TextField
+                    name="telegramId"
+                    label="Telegram ID"
+                    value={form.telegramId}
+                    onChange={handleChange}
+                    required
+                    type="text"
+                  />
+                </>
+              )}
+
               <TextField
                 name="password"
                 label="Password"
                 value={form.password}
                 onChange={handleChange}
+                required
                 type="password"
               />
               {isSignup && (
@@ -122,6 +151,7 @@ const SignUpSignIn = () => {
                     name="confirmPassword"
                     label="Repeat Password"
                     value={form.confirmPassword}
+                    required
                     onChange={handleChange}
                     type="password"
                   />

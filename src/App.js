@@ -11,6 +11,7 @@ import CreatePost from "./ComponentPage/CreatePost";
 import UpdateModule from "./Admin/UpdateModule";
 import SignUpSignIn from "./Authentication/SignUpSignIn";
 import Profile from "./ComponentPage/Profile";
+import PersonalBookmark from "./ComponentPage/PersonalBookmark";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/forum/:id/posts/:index" element={<Post />}></Route>
           <Route path="/profile/:id" element={<Profile />}></Route>
           <Route path="/updatemodule" element={<UpdateModule />}></Route>
+          <Route path="/bookmark" element={<PersonalBookmark />}></Route>
         </Routes>
       </Router>
     </div>

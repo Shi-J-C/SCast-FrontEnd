@@ -171,7 +171,9 @@ const Nav = () => {
                 >
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseUserMenu}>
+                <MenuItem
+                  onClick={() => navigate("/bookmark", { replace: true })}
+                >
                   <Typography textAlign="center">Bookmark</Typography>
                 </MenuItem>
                 <MenuItem onClick={logout}>

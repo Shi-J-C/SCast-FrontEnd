@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Grid } from "@material-ui/core";
-import { Paper, Container, Typography, Button } from "@mui/material";
-import { Link, useParams } from "react-router-dom";
+import { Paper, Container, Button } from "@mui/material";
+import { useParams } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
@@ -10,6 +10,8 @@ const Profile = () => {
   const initialState = {
     name: "",
     username: "",
+    phoneNo: "",
+    telegramId: "",
     password: "",
     confirmPassword: "",
   };
@@ -24,6 +26,7 @@ const Profile = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // call update backend
     console.log(userProfile);
   };
 
@@ -35,7 +38,8 @@ const Profile = () => {
         ...userProfile,
         name: response.data.name,
         username: response.data.username,
-        password: response.data.password,
+        phoneNo: response.data.phoneNo,
+        telegramId: response.data.telegramId,
       });
     }
     fetchUserData();
@@ -73,7 +77,24 @@ const Profile = () => {
                 label="User Name"
                 value={userProfile.username}
                 onChange={handleChange}
-                // type="email"
+                type="email"
+              />
+
+              <TextField
+                name="phoneNo"
+                label="Phone Number"
+                value={userProfile.phoneNo}
+                onChange={handleChange}
+                required
+                type="number"
+              />
+              <TextField
+                name="telegramId"
+                label="Telegram ID"
+                value={userProfile.telegramId}
+                onChange={handleChange}
+                required
+                type="text"
               />
 
               {changePassword && (
