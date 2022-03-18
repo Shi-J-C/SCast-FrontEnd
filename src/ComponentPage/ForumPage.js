@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ForumDetail from './ForumDetail'
-import { FaChartBar } from 'react-icons/fa'
 
 export default function ForumPage() {
   const [moduleData, setModuleData] = useState([])
@@ -41,7 +40,7 @@ export default function ForumPage() {
 
           {/************************************** Display Year 1 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY1(!showY1)}>
-            <small style={{ fontWeight: 'bold' }}>
+            <small style={{ fontWeight: 'bold', marginLeft: '5px' }}>
               Year 1 {showY1 ? '[COLLAPSE]' : '[EXPAND]'}
             </small>
           </div>
@@ -59,7 +58,7 @@ export default function ForumPage() {
 
           {/************************************** Display Year 2 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY2(!showY2)}>
-            <small style={{ fontWeight: 'bold' }}>
+            <small style={{ fontWeight: 'bold', marginLeft: '5px' }}>
               Year 2 {showY2 ? '[COLLAPSE]' : '[EXPAND]'}
             </small>
           </div>
@@ -77,7 +76,7 @@ export default function ForumPage() {
 
           {/************************************** Display Year 3 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY3(!showY3)}>
-            <small style={{ fontWeight: 'bold' }}>
+            <small style={{ fontWeight: 'bold', marginLeft: '5px' }}>
               Year 3 {showY3 ? '[COLLAPSE]' : '[EXPAND]'}
             </small>
           </div>
@@ -95,7 +94,7 @@ export default function ForumPage() {
 
           {/************************************** Display Year 4 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY4(!showY4)}>
-            <small style={{ fontWeight: 'bold' }}>
+            <small style={{ fontWeight: 'bold', marginLeft: '5px' }}>
               Year 4 {showY4 ? '[COLLAPSE]' : '[EXPAND]'}
             </small>
           </div>
