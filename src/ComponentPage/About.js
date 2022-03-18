@@ -2,7 +2,7 @@ import React from 'react'
 import Footer from './Footer'
 const About = () => {
   return (
-    <div style={{ margin: '80px' }}>
+    <div style={{ textAlign: 'center', marginTop: '15%' }}>
       <h1 style={{ fontSize: '20px' }}>About SCast Forum</h1>
       <p>
         SCast is an application developed to meet the needs of social
