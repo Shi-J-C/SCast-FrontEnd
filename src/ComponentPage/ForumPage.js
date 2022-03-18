@@ -41,7 +41,9 @@ export default function ForumPage() {
 
           {/************************************** Display Year 1 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY1(!showY1)}>
-            <small>Year 1 {showY1 ? '[COLLAPSE]' : '[EXPAND]'}</small>
+            <small style={{ fontWeight: 'bold' }}>
+              Year 1 {showY1 ? '[COLLAPSE]' : '[EXPAND]'}
+            </small>
           </div>
           {showY1
             ? moduleData
@@ -57,7 +59,9 @@ export default function ForumPage() {
 
           {/************************************** Display Year 2 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY2(!showY2)}>
-            <small>Year 2 {showY2 ? '[COLLAPSE]' : '[EXPAND]'}</small>
+            <small style={{ fontWeight: 'bold' }}>
+              Year 2 {showY2 ? '[COLLAPSE]' : '[EXPAND]'}
+            </small>
           </div>
           {showY2
             ? moduleData
@@ -73,7 +77,9 @@ export default function ForumPage() {
 
           {/************************************** Display Year 3 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY3(!showY3)}>
-            <small>Year 3 {showY3 ? '[COLLAPSE]' : '[EXPAND]'}</small>
+            <small style={{ fontWeight: 'bold' }}>
+              Year 3 {showY3 ? '[COLLAPSE]' : '[EXPAND]'}
+            </small>
           </div>
           {showY3
             ? moduleData
@@ -89,7 +95,9 @@ export default function ForumPage() {
 
           {/************************************** Display Year 4 module **************************************************/}
           <div className='subforum-title' onClick={() => setShowY4(!showY4)}>
-            <small>Year 4 {showY4 ? '[COLLAPSE]' : '[EXPAND]'}</small>
+            <small style={{ fontWeight: 'bold' }}>
+              Year 4 {showY4 ? '[COLLAPSE]' : '[EXPAND]'}
+            </small>
           </div>
           {showY4
             ? moduleData
