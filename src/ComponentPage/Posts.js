@@ -77,7 +77,6 @@ export default function Posts() {
               return post
             }
           })
-
           .map((d, index) => (
             <div className='table-row' key={index}>
               <div className='status'>
