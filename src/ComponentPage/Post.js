@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import AuthorProfile from "./AuthorProfile";
 import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 export default function Post() {
   const { id, index } = useParams();
@@ -38,6 +39,21 @@ export default function Post() {
     };
   }, []);
 
+  const sendEmail = (e) => {
+    axios.get(`http://localhost:3000/user/${post.userId}`).then((res) => {
+      emailjs.send(
+        "service_9pdromc",
+        "template_7t659bh",
+        {
+          to_name: post.name,
+          from_name: reply.name,
+          reply_to: res.data.username,
+        },
+        "user_Y4ik86BzyllTug3YYhcRR"
+      );
+    });
+  };
+
   const handleReplySubmit = (e) => {
     // e.preventDefault()
     let user = JSON.parse(sessionStorage.getItem("user"));
@@ -48,10 +64,12 @@ export default function Post() {
       temp = [...temp, reply];
       setComment(temp);
       reply.postId = post._id;
-      console.log(reply);
       axios
         .post(`http://localhost:3000/comment/${id}/addcomment`, reply)
-        .then((res) => setReply({ ...reply, commentText: "" }));
+        .then((res) => {
+          setReply({ ...reply, commentText: "" });
+          sendEmail(reply);
+        });
     } else {
       alert("Please sign up or sign in with us before reply.");
       navigate("/auth", { replace: true });
