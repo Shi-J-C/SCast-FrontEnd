@@ -4,23 +4,24 @@ import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Button from '@mui/material/Button'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 export default function Posts() {
   const [searchTerm, setSearchTerm] = useState('')
   const [posts, setPosts] = useState([])
   const [module, setModule] = useState([])
   const { id } = useParams()
+  let deletePostId = { postId: '' }
+  const [forceupdate, setForceUpdate] = useState(false)
+  let user = JSON.parse(sessionStorage.getItem('user'))
 
   useEffect(() => {
-    const source = axios.CancelToken.source()
+    setForceUpdate(false)
     axios.get(`http://localhost:3000/module/${id}`).then((res) => {
       setModule(res.data)
       setPosts(res.data.post)
     })
-    return () => {
-      source.cancel()
-    }
-  }, [])
+  }, [forceupdate])
 
   let navigate = useNavigate()
   const routechange = () => {
@@ -32,6 +33,14 @@ export default function Posts() {
       alert('Please sign up or sign in with us before posting.')
       navigate('/auth', { replace: true })
     }
+  }
+
+  const handleDeletePost = (para) => {
+    deletePostId = { postId: para }
+    console.log(deletePostId)
+    axios.post(`http://localhost:3000/post/${id}/deletePost`, deletePostId)
+    alert('Post Deleted')
+    setForceUpdate(true)
   }
 
   return (
@@ -84,6 +93,18 @@ export default function Posts() {
               </div>
               <div className='subjects'>
                 <Link to={`/forum/${id}/posts/${index}`}>{d.postTitle}</Link>
+                {user?.role === 'administrator' ? (
+                  <Button
+                    style={{ position: 'absolute', right: '25%' }}
+                    startIcon={<DeleteIcon />}
+                    onClick={() => {
+                      handleDeletePost(d._id)
+                    }}
+                  ></Button>
+                ) : (
+                  ''
+                )}
+
                 <br />
                 <span>Started by {d.name}</span>
               </div>

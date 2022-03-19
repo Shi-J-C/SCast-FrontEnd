@@ -78,7 +78,7 @@ h1 {
 }
 
 .navigation {
-  background-color: gray;
+  background-color: rgb(175, 175, 175);
   padding: 10px;
   width: 100%;
   border-radius: 5px;
@@ -179,7 +179,7 @@ footer {
 .table-head div {
   padding: 5px;
   margin: 2px;
-  background-color: gray;
+  background-color: rgb(175, 175, 175);
   font-weight: bold;
   border: black;
   border-width: thin;
