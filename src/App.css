@@ -2,6 +2,15 @@
   box-sizing: border-box;
 }
 
+.App {
+  background-image: url('https://sabrangindia.in/sites/default/files/field/image/elearning-getty.jpg');
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
 html {
   font-size: 14px;
   font-family: 'Titillium Web', sans-serif;

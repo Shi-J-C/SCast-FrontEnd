@@ -4,7 +4,6 @@ import TableRow from '@mui/material/TableRow'
 import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import axios from 'axios'
 
 const ReadOnlyRow = ({ module, handleEditClick, handleDelete }) => {
   return (
