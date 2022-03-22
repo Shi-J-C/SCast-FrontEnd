@@ -52,6 +52,7 @@ const SignUpSignIn = () => {
         axios
           .post(`http://localhost:3000/user/addUser`, temp)
           .then((res) => setForm(initialState))
+        alert('You have successfully created an account')
       } else {
         alert('Your repeat password is different!!')
       }
