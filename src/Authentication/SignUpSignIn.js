@@ -176,15 +176,8 @@ const SignUpSignIn = () => {
                     value={form.confirmPassword}
                     required
                     onChange={handleChange}
-                    type='password'
+                    type={passwordShown ? 'text' : 'password'}
                   />
-                  <FileBase
-                    type='file'
-                    multiple={false}
-                    onDone={({ base64 }) =>
-                      setForm({ ...form, userimage: base64 })
-                    }
-                  ></FileBase>
                 </>
               )}
             </Grid>
